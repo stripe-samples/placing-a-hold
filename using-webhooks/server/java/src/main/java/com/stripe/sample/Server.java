@@ -61,9 +61,7 @@ public class Server {
         port(4242);
         Stripe.apiKey = System.getenv("STRIPE_SECRET_KEY");
 
-        staticFiles.externalLocation(
-                Paths.get(Paths.get("").toAbsolutePath().getParent().getParent().toString() + "/client")
-                        .toAbsolutePath().toString());
+        staticFiles.externalLocation(Paths.get(Paths.get("").toAbsolutePath().toString(),System.getenv("STATIC_DIR")).normalize().toString());
 
         post("/create-payment-intent", (request, response) -> {
             response.type("application/json");

@@ -5,12 +5,16 @@ use Stripe\Stripe;
 
 require 'vendor/autoload.php';
 
+$ENV_PATH = '../..';
+
+$dotenv = Dotenv\Dotenv::create(realpath($ENV_PATH));
+$dotenv->load();
+
+require './config.php';
+
 if (PHP_SAPI == 'cli-server') {
   $_SERVER['SCRIPT_NAME'] = '/index.php';
 }
-
-$dotenv = Dotenv\Dotenv::create(realpath('../..'));
-$dotenv->load();
 
 $app = new \Slim\App;
 
