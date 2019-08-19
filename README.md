@@ -27,7 +27,7 @@ This sample shows:
 🙅 **Handling card authentication requests and declines.** Attempts to charge a card can fail if the bank declines the purchase or requests additional authentication.  | ✅  | ✅ |
 💁 **Placing a hold on a card.** By setting confirmation_method to "manual" when creating a PaymentIntent, you split the authorization and capture steps. | ✅ | ✅ |
 ↪️ **Using webhooks to respond to a hold being placed on the card.** Confirming the payment on the client requires using webhooks for any follow up actions, like capturing the funds. | ✅ | ❌ |
-💰 **Tracking multiple payment attempts in a PaymentIntent.** The webhook integration lets you use a PaymentIntent for multiple payment attempts to track the customer's payment session in one object. | ✅ | ❌ |
+🏦 **Easily scalable to other payment methods.** Webhooks enable easy adoption of other asynchroneous payment methods like direct debits and push-based payment flows. | ✅ | ❌ |
 
 
 ## How to run locally
