@@ -33,10 +33,9 @@ This sample shows:
 ## How to run locally
 This sample includes 5 server implementations in Node, Ruby, Python, Java, and PHP for the two integration types: [using-webhooks](/using-webhooks) and [without-webhooks](/without-webhooks). 
 
-If you want to run the sample locally, go into the directory of the integration you want to use and copy the .env.example file to your own .env file in the integration you want to try: 
+If you want to run the sample locally copy the .env.example file to your own .env file: 
 
 ```
-cd manual-confirmation 
 cp .env.example .env
 ```
 
