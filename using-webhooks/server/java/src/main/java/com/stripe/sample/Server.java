@@ -19,6 +19,8 @@ import com.stripe.exception.*;
 import com.stripe.net.Webhook;
 import com.stripe.param.PaymentIntentCreateParams;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 public class Server {
     private static Gson gson = new Gson();
 
@@ -59,9 +61,13 @@ public class Server {
 
     public static void main(String[] args) {
         port(4242);
-        Stripe.apiKey = System.getenv("STRIPE_SECRET_KEY");
+        String ENV_FILE_PATH = "../../";
+        Dotenv dotenv = Dotenv.configure().directory(ENV_FILE_PATH).load();
 
-        staticFiles.externalLocation(Paths.get(Paths.get("").toAbsolutePath().toString(),System.getenv("STATIC_DIR")).normalize().toString());
+        Stripe.apiKey = dotenv.get("STRIPE_SECRET_KEY");
+
+        staticFiles.externalLocation(
+                Paths.get(Paths.get("").toAbsolutePath().toString(), dotenv.get("STATIC_DIR")).normalize().toString());
 
         post("/create-payment-intent", (request, response) -> {
             response.type("application/json");
@@ -73,14 +79,14 @@ public class Server {
             // Create a PaymentIntent with the order amount and currency
             PaymentIntent intent = PaymentIntent.create(createParams);
             // Send public key and PaymentIntent details to client
-            return gson.toJson(new CreatePaymentResponse(System.getenv("STRIPE_PUBLIC_KEY"), intent.getClientSecret(),
+            return gson.toJson(new CreatePaymentResponse(dotenv.get("STRIPE_PUBLIC_KEY"), intent.getClientSecret(),
                     intent.getId()));
         });
 
         post("/webhook", (request, response) -> {
             String payload = request.body();
             String sigHeader = request.headers("Stripe-Signature");
-            String endpointSecret = System.getenv("STRIPE_WEBHOOK_SECRET");
+            String endpointSecret = dotenv.get("STRIPE_WEBHOOK_SECRET");
 
             Event event = null;
 

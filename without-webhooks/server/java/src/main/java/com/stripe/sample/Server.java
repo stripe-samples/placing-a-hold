@@ -14,6 +14,8 @@ import com.stripe.Stripe;
 import com.stripe.model.PaymentIntent;
 import com.stripe.param.PaymentIntentCreateParams;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 public class Server {
     private static Gson gson = new Gson();
 
@@ -104,7 +106,8 @@ public class Server {
         case "succeeded":
             System.out.println("💰 Payment received!");
             // Payment is complete, authentication not required
-            // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
+            // To cancel the payment after capture you will need to issue a Refund
+            // (https://stripe.com/docs/api/refunds)
             response.setClientSecret(intent.getClientSecret());
             break;
         default:
@@ -115,14 +118,18 @@ public class Server {
 
     public static void main(String[] args) {
         port(4242);
-        Stripe.apiKey = System.getenv("STRIPE_SECRET_KEY");
+        String ENV_FILE_PATH = "../../";
+        Dotenv dotenv = Dotenv.configure().directory(ENV_FILE_PATH).load();
 
-        staticFiles.externalLocation(Paths.get(Paths.get("").toAbsolutePath().toString(),System.getenv("STATIC_DIR")).normalize().toString());
+        Stripe.apiKey = dotenv.get("STRIPE_SECRET_KEY");
+
+        staticFiles.externalLocation(
+                Paths.get(Paths.get("").toAbsolutePath().toString(), dotenv.get("STATIC_DIR")).normalize().toString());
 
         get("/stripe-key", (request, response) -> {
             response.type("application/json");
             // Send public key to client
-            return gson.toJson(new StripeKeyResponse(System.getenv("STRIPE_PUBLIC_KEY")));
+            return gson.toJson(new StripeKeyResponse(dotenv.get("STRIPE_PUBLIC_KEY")));
         });
 
         post("/pay", (request, response) -> {
@@ -152,7 +159,8 @@ public class Server {
                     // Because capture_method was set to manual we need to manually capture in order
                     // to move the funds
                     // You have 7 days to capture a confirmed PaymentIntent
-                    // To cancel a payment before capturing use .cancel() (https://stripe.com/docs/api/payment_intents/cancel)
+                    // To cancel a payment before capturing use .cancel()
+                    // (https://stripe.com/docs/api/payment_intents/cancel)
                     intent = intent.capture();
                 }
                 responseBody = generateResponse(intent, responseBody);
