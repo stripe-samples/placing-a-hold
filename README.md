@@ -11,7 +11,15 @@ The [Payment Intents API](https://stripe.com/docs/api/payment_intents) abstracts
 
 Note that funds must be captured within **7 days** of authorizing the card or the PaymentIntent reverts back to a status of "requires_payment_method". If you want to charge a customer more than 7 days after collecting their card details see our sample on [saving cards](https://github.com/stripe-samples/saving-card-without-payment).
 
-See a [hosted version](https://nbzjj.sse.codesandbox.io/) of the demo in test mode or fork on [codesandbox.io](https://codesandbox.io/s/stripe-sample-placing-a-hold-nbzjj)
+**Demo**
+
+See a [hosted version](https://nbzjj.sse.codesandbox.io/) of the demo or fork a copy on [codesandbox.io](https://codesandbox.io/s/stripe-sample-placing-a-hold-nbzjj)
+
+The demo is running in test mode -- use `4242424242424242` as a test card number with any CVC code + a future expiration date.
+
+Use the `4000000000003220` test card number to trigger a 3D Secure challenge flow.
+
+Read more about testing on Stripe at https://stripe.com/docs/testing.
 
 <img src="./placing-hold-preview.png" alt="Checkout page to place a hold" align="center">
 
