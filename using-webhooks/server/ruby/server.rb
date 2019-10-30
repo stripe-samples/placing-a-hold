@@ -2,9 +2,8 @@ require 'stripe'
 require 'sinatra'
 require 'dotenv'
 
-# Replace if using a different env file or config
-ENV_PATH = '/../../../.env'
-Dotenv.load(File.dirname(__FILE__) + ENV_PATH)
+# Copy the .env.example in the root into a .env file in this folder
+Dotenv.load
 Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 
 set :static, true
@@ -35,9 +34,9 @@ post '/create-payment-intent' do
     capture_method: 'manual'
   )
 
-  # Send public key and PaymentIntent details to client
+  # Send publishable key and PaymentIntent details to client
   {
-    publicKey: ENV['STRIPE_PUBLIC_KEY'],
+    publicKey: ENV['STRIPE_PUBLISHABLE_KEY'],
     clientSecret: payment_intent['client_secret'],
     id: payment_intent['id']
   }.to_json
