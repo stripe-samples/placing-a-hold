@@ -52,14 +52,16 @@ git clone https://github.com/stripe-samples/placing-a-hold
 
 **2. Copy the .env.example to a .env file:**
 
-```
-cp .env.example .env
-```
-
-You will need a Stripe account in order to run the demo. Once you set up your account, go to the Stripe [developer dashboard](https://stripe.com/docs/development#api-keys) to find your API keys.
+Copy the .env.example file into a file named .env in the folder of the server you want to use. For example:
 
 ```
-STRIPE_PUBLIC_KEY=<replace-with-your-publishable-key>
+cp .env.example using-webhooks/server/node/.env
+```
+
+You will need a Stripe account in order to run the demo. Once you set up your account, go to the Stripe [developer dashboard](https://stripe.com/docs/development#api-keys) to find your API keys and update your .env file with the keys.
+
+```
+STRIPE_PUBLISHABLE_KEY=<replace-with-your-publishable-key>
 STRIPE_SECRET_KEY=<replace-with-your-secret-key>
 ```
 
