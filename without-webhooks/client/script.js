@@ -44,8 +44,8 @@ var setupElements = function(data) {
   card.mount("#card-element");
 
   return {
-    stripe,
-    card,
+    stripe: stripe,
+    card: card,
     clientSecret: data.clientSecret
   };
 };
@@ -79,8 +79,7 @@ var handleAction = function(clientSecret) {
 };
 
 /*
- * Calls stripe.handleCardPayment which creates a pop-up modal to
- * prompt the user to enter  extra authentication details without leaving your page
+ * Collect card details and pay for the order
  */
 var pay = function(stripe, card) {
   var cardholderName = document.querySelector("#name").value;
@@ -94,7 +93,7 @@ var pay = function(stripe, card) {
 
   changeLoadingState(true);
 
-  // Initiate the payment. handleCardPayment will display a modal
+  // Collect payment details
   stripe
     .createPaymentMethod("card", card, data)
     .then(function(result) {
