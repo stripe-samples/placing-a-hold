@@ -22,7 +22,7 @@ fetch("/create-payment-intent", {
   .then(function({ stripe, card, clientSecret }) {
     document.querySelector("#submit").addEventListener("click", function(evt) {
       evt.preventDefault();
-      // Initiate payment 
+      // Initiate payment
       pay(stripe, card, clientSecret);
     });
   });
@@ -58,13 +58,14 @@ var setupElements = function(data) {
 };
 
 /*
- * Calls stripe.handleCardPayment which creates a pop-up modal to
+ * Calls stripe.confirmCardPayment which creates a pop-up modal to
  * prompt the user to enter  extra authentication details without leaving your page
  */
 var pay = function(stripe, card, clientSecret) {
   var cardholderName = document.querySelector("#name").value;
 
   var data = {
+    card: card,
     billing_details: {}
   };
 
@@ -74,10 +75,10 @@ var pay = function(stripe, card, clientSecret) {
 
   changeLoadingState(true);
 
-  // Initiate the payment. 
-  // If authentication is required, handleCardPayment will display a modal
+  // Initiate the payment.
+  // If authentication is required, confirmCardPayment will display a modal
   stripe
-    .handleCardPayment(clientSecret, card, { payment_method_data: data })
+    .confirmCardPayment(clientSecret, { payment_method: data })
     .then(function(result) {
       if (result.error) {
         changeLoadingState(false);
@@ -106,7 +107,9 @@ var orderComplete = function(clientSecret) {
       view.classList.remove("hidden");
     });
     document.querySelector(".hold-status").textContent =
-      paymentIntent.status === "requires_capture" ? "successfully placed" : "did not place";
+      paymentIntent.status === "requires_capture"
+        ? "successfully placed"
+        : "did not place";
     document.querySelector("pre").textContent = paymentIntentJson;
   });
 };
