@@ -1,0 +1,16 @@
+{
+    "name": "placing-a-hold",
+    "configureDotEnv": true,
+    "integrations": [
+      {
+        "name": "using-webhooks",
+        "clients": ["web"],
+        "servers": ["java", "node", "php", "python", "ruby"]
+      },
+      {
+        "name": "without-webhooks",
+        "clients": ["web"],
+        "servers": ["java", "node", "php", "python", "ruby"]
+      }
+    ]
+  }
