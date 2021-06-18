@@ -1,9 +1,9 @@
 # Placing a hold on a card
 Charging a card consists of three steps:
 
-**🕵️ Authentication -** Card information is sent to the card issuer for verification. Some cards may require the cardholder to strongly authenticate the purchase through protocols like [3D Secure](https://stripe.com/ie/guides/3d-secure-2). 
+**🕵️ Authentication -** Card information is sent to the card issuer for verification. Some cards may require the cardholder to strongly authenticate the purchase through protocols like [3D Secure](https://stripe.com/ie/guides/3d-secure-2).
 
-**💁 Authorization -** Funds from the customer's account are put on hold but not transferred to the merchant. 
+**💁 Authorization -** Funds from the customer's account are put on hold but not transferred to the merchant.
 
 **💸 Capture -** Funds are transferred to the merchant's account and the payment is complete.
 
@@ -23,8 +23,8 @@ Read more about testing on Stripe at https://stripe.com/docs/testing.
 
 <img src="./placing-hold-preview.png" alt="Checkout page to place a hold" align="center">
 
-There are two implementations depending on whether you want to use webhooks for any post-payment process: 
-* **[/using-webhooks](/using-webhooks)** Confirms the payment on the client and requires using webhooks or other async event handlers for any post-payment logic (e.g. sending email receipts, fulfilling orders). 
+There are two implementations depending on whether you want to use webhooks for any post-payment process:
+* **[/using-webhooks](/using-webhooks)** Confirms the payment on the client and requires using webhooks or other async event handlers for any post-payment logic (e.g. sending email receipts, fulfilling orders).
 * **[/without-webhooks](/without-webhooks)** Confirms the payment on the server and allows you to run any post-payment logic right after.
 
 This sample shows:
@@ -40,7 +40,7 @@ This sample shows:
 
 ## How to run locally
 
-This sample includes 5 server implementations in Node, Ruby, Python, Java, and PHP for the two integration types: [using-webhooks](/using-webhooks) and [without-webhooks](/without-webhooks). 
+This sample includes 5 server implementations in Node, Ruby, Python, Java, and PHP for the two integration types: [using-webhooks](/using-webhooks) and [without-webhooks](/without-webhooks).
 
 Follow the steps below to run locally.
 
@@ -109,7 +109,7 @@ The CLI will print a webhook secret key to the console. Set `STRIPE_WEBHOOK_SECR
 
 You should see events logged in the console where the CLI is running.
 
-When you are ready to create a live webhook endpoint, follow our guide in the docs on [configuring a webhook endpoint in the dashboard](https://stripe.com/docs/webhooks/setup#configure-webhook-settings). 
+When you are ready to create a live webhook endpoint, follow our guide in the docs on [configuring a webhook endpoint in the dashboard](https://stripe.com/docs/webhooks/setup#configure-webhook-settings).
 
 
 ## FAQ
@@ -121,7 +121,7 @@ A: We chose the most minimal framework to convey the key Stripe calls and concep
 If you found a bug or want to suggest a new [feature/use case/sample], please [file an issue](../../issues).
 
 If you have questions, comments, or need help with code, we're here to help:
-- on [IRC via freenode](https://webchat.freenode.net/?channel=#stripe)
+- on [Discord](https://stripe.com/go/developer-chat)
 - on Twitter at [@StripeDev](https://twitter.com/StripeDev)
 - on Stack Overflow at the [stripe-payments](https://stackoverflow.com/tags/stripe-payments/info) tag
 - by [email](mailto:support+github@stripe.com)
