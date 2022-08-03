@@ -28,12 +28,16 @@ public class Server {
     }
 
     static class PayRequestBody {
+
         @SerializedName("items")
         Object[] items;
+
         @SerializedName("paymentIntentId")
         String paymentIntentId;
+
         @SerializedName("paymentMethodId")
         String paymentMethodId;
+
         @SerializedName("currency")
         String currency;
 
@@ -118,7 +122,7 @@ public class Server {
 
     public static void main(String[] args) {
         port(4242);
-        
+
         Dotenv dotenv = Dotenv.load();
 
         Stripe.apiKey = dotenv.get("STRIPE_SECRET_KEY");
